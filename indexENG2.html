@@ -61,42 +61,27 @@
     @keyframes fadeIn {
       to { opacity: 1; }
     }
-    .lang-pl, .lang-en {
+    .lang-pl {
       display: none;
     }
-    .language-switcher {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
-    }
-    .language-switcher button {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 16px;
-      margin: 0 5px;
-      cursor: pointer;
+    .lang-en {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div class="language-switcher">
-    <button onclick="switchLanguage('pl')">PL</button>
-    <button onclick="switchLanguage('en')">EN</button>
-  </div>
-
   <header>
+    <div style="text-align: center;">
+      <a href="?lang=pl" style="color: #fff; margin-right: 10px;">PL</a> | 
+      <a href="?lang=en" style="color: #fff; margin-left: 10px;">EN</a>
+    </div>
     <h1>Weronika Ślaga</h1>
     <h2>Design & Marketing</h2>
   </header>
 
   <section class="about">
     <p>
-      <!-- Polish version -->
       <span class="lang-pl">Jestem pasjonatką projektowania graficznego i komunikacji wizualnej. Uwielbiam tworzyć unikalne plakaty, spójne identyfikacje wizualne i branding, który przyciąga uwagę i zostaje w pamięci. W designie stawiam na emocje, estetykę i cel.</span>
-      
-      <!-- English version -->
       <span class="lang-en">I am passionate about graphic design and visual communication. I love creating unique posters, cohesive visual identities, and branding that grabs attention and stays in memory. In design, I focus on emotions, aesthetics, and purpose.</span>
     </p>
   </section>
@@ -108,34 +93,23 @@
   </section>
 
   <footer>
-    <!-- Polish version -->
     <span class="lang-pl">&copy; 2025 Weronika Ślaga. Wszelkie prawa zastrzeżone.</span>
-    
-    <!-- English version -->
     <span class="lang-en">&copy; 2025 Weronika Ślaga. All rights reserved.</span>
   </footer>
 
   <script>
-    function switchLanguage(language) {
-      // Ukrywa wszystkie wersje językowe
-      document.querySelectorAll('.lang-pl, .lang-en').forEach(el => {
-        el.style.display = 'none';
-      });
+    const urlParams = new URLSearchParams(window.location.search);
+    const lang = urlParams.get('lang') || 'en';
 
-      // Wyświetla wybraną wersję językową
-      if (language === 'pl') {
-        document.querySelectorAll('.lang-pl').forEach(el => {
-          el.style.display = 'block';
-        });
-      } else {
-        document.querySelectorAll('.lang-en').forEach(el => {
-          el.style.display = 'block';
-        });
-      }
-    }
+    document.querySelectorAll('.lang-pl').forEach(el => {
+      if (lang === 'pl') el.style.display = 'block';
+      else el.style.display = 'none';
+    });
 
-    // Domyślnie ustawiamy język angielski
-    window.onload = () => switchLanguage('en');
+    document.querySelectorAll('.lang-en').forEach(el => {
+      if (lang === 'en') el.style.display = 'block';
+      else el.style.display = 'none';
+    });
   </script>
 </body>
 </html>
